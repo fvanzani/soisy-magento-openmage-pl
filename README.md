@@ -1,10 +1,10 @@
-Magento 1 PagoLight Payment Extension
+Magento 1 / OpenMage PagoLight Payment Extension
 =================================
-Magento 1.x PagoLight's installment payment method
+Magento 1.x OpenMage 20.x PagoLight's installment payment method
 
 Facts
 -----
-- version: 1.0.0
+- version: 1.1.0
 - extension key: Soisy_SoisyPayment
 
 Description
