@@ -1,0 +1,25 @@
+<?php
+if (!$this->isSoisyPayment()) {
+    return;
+}
+?>
+<div class="description_before_redirect">
+<?php
+echo $this->getDescription();
+?>
+</div>
+<?php
+if (!$this->getSoisyToken()) {
+    return;
+}
+?>
+<?php
+$webAppUrl = $this->getWebAppUrl();
+?>
+<p><a href="<?php echo $webAppUrl;?>"><?php echo __('Clicca qui per proseguire');?></a></p>
+<script type="text/javascript">
+    window.setTimeout(function () {
+        location.href = <?php echo json_encode($webAppUrl); ?>;
+    }, 6000);
+</script>
+

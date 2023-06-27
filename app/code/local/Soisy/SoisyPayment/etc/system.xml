@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <soisy translate="label" module="soisypayment">
+            <label>PagoLight</label>
+            <sort_order>300</sort_order>
+        </soisy>
+    </tabs>
+   <sections>
+       <soisy_soisypayment  translate="label" module="soisypayment">
+           <label>PagoLight</label>
+           <tab>soisy</tab>
+           <frontend_type>text</frontend_type>
+           <sort_order>0</sort_order>
+           <show_in_default>1</show_in_default>
+           <show_in_website>1</show_in_website>
+           <show_in_store>1</show_in_store>
+
+           <groups>
+               <general translate="label">
+                   <label>General</label>
+                   <frontend_type>text</frontend_type>
+                   <sort_order>0</sort_order>
+                   <show_in_default>1</show_in_default>
+                   <show_in_website>1</show_in_website>
+                   <show_in_store>1</show_in_store>
+                   <comment><![CDATA[
+                      PagoLight Payment Module (basic implementation).<br>
+
+                      Go to Sales -> Payment Methods -> PagoLight
+
+                      ]]>
+                   </comment>
+
+               </general>
+           </groups>
+       </soisy_soisypayment>
+
+        <payment>
+            <groups>
+                <soisypayment translate="label" module="soisypayment">
+                    <label>PagoLight</label>
+                    <sort_order>700</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment Applicable From</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>14</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>16</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+
+
+                        <log_enabled translate="label">
+                            <label>Enable custom log</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                             Writes debug logs to file 'soisypayment.log'. <br>Default: NO
+                             ]]></comment>
+                        </log_enabled>
+
+                        <simulation_enabled translate="label">
+                            <label>Enable simulation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                             If Yes it shows simulation widget on product page view and on checkout. Default: Yes.
+                             ]]></comment>
+                        </simulation_enabled>
+
+                        <shop_id translate="label">
+                            <label>Shop ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Shop ID. Sandbox: "partnershop"</comment>
+                        </shop_id>
+
+                        <shop_id_simulation translate="label">
+                            <label>Shop ID (simulation)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>This field is used only for simulation widget and only if sandbox is enabled. Default: "soisytests"</comment>
+                        </shop_id_simulation>
+
+                        <auth_token translate="label">
+                            <label>Auth Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Auth Token. Sandbox: "partnerkey"</comment>
+                        </auth_token>
+                        <endpoint translate="label">
+                            <label>PagoLight Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                             PagoLight Endpoint. <br>
+                             Sandbox: "http://api.sandbox.soisy.it" <br>
+                             Production: https://api.soisy.it
+                               ]]></comment>
+                        </endpoint>
+                        <webapp translate="label">
+                            <label>PagoLight Webapp url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                PagoLight Loan url <br>
+                                Sandbox: "http://shop.sandbox.soisy.it" <br>
+                                Production: "https://shop.soisy.it"
+                                ]]></comment>
+                        </webapp>
+                        <min_amount translate="label">
+                            <label>Minimum order amount </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Minimum order amount. Default: 60</comment>
+                        </min_amount>
+
+                        <success_description translate="label">
+                            <label>Success page description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This description is showed when the customer comes back to the store</comment>
+                        </success_description>
+                        <error_description translate="label">
+                            <label>Error page description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>72</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This description is showed when the customer comes back from PagoLight to the store and an error occurred.</comment>
+                        </error_description>
+
+                        <success_description_before_redirect translate="label">
+                            <label>Success description before redirect</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>74</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This description is showed on the magento success page before redirect.</comment>
+                        </success_description_before_redirect>
+
+                        <error_description_before_redirect translate="label">
+                            <label>Error description before redirect</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>76</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This description is showed on the magento success page before redirect, but the user is not redirected to PagoLight because an error occurred during PagoLight order creation.</comment>
+                        </error_description_before_redirect>
+                    </fields>
+                </soisypayment>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Soisy_SoisyPayment>
+            <version>1.1.0</version>
+        </Soisy_SoisyPayment>
+    </modules>
+    <global>
+        <models>
+            <soisypayment>
+                <class>Soisy_SoisyPayment_Model</class>
+            </soisypayment>
+        </models>
+        <helpers>
+            <soisypayment>
+                <class>Soisy_SoisyPayment_Helper</class>
+            </soisypayment>
+        </helpers>
+        <blocks>
+            <soisypayment>
+                <class>Soisy_SoisyPayment_Block</class>
+            </soisypayment>
+        </blocks>
+        <resources>
+            <soisypayment_setup>
+                <setup>
+                    <module>Soisy_SoisyPayment</module>
+                    <class>Mage_Sales_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </soisypayment_setup>
+        </resources>
+    </global>
+
+    <frontend>
+        <events>
+            <sales_order_save_before>
+                <observers>
+                    <sales_order_place_after_handler>
+                        <type>model</type>
+                        <class>soisypayment/observer</class>
+                        <method>soisyOrderCreate</method>
+                    </sales_order_place_after_handler>
+                </observers>
+            </sales_order_save_before>
+            <payment_method_is_active>
+                <observers>
+                    <payment_method_is_active_handle>
+                        <type>singleton</type>
+                        <class>Soisy_SoisyPayment_Model_Observer</class>
+                        <method>hideSoisyPayment</method>
+                    </payment_method_is_active_handle>
+                </observers>
+            </payment_method_is_active>
+        </events>
+        <routers>
+            <soisypayment>
+                <use>standard</use>
+                <args>
+                    <module>Soisy_SoisyPayment</module>
+                    <frontName>soisy</frontName>
+                </args>
+            </soisypayment>
+        </routers>
+        <layout>
+            <updates>
+                <soisypayment>
+                    <file>soisypayment.xml</file>
+                </soisypayment>
+            </updates>
+        </layout>
+    </frontend>
+
+    <default>
+        <payment>
+            <soisypayment>
+                <active>0</active>
+                <model>soisypayment/standard</model>
+                <order_status>pending</order_status>
+                <title>Pagamento rateale con PagoLight</title>
+                <sort_order>10</sort_order>
+                <log_enabled>1</log_enabled>
+                <simulation_enabled>1</simulation_enabled>
+                <endpoint>https://api.sandbox.soisy.it</endpoint>
+                <webapp>https://shop.sandbox.soisy.it</webapp>
+                <shop_id>partnershop</shop_id>
+                <shop_id_simulation>soisytests</shop_id_simulation>
+                <auth_token>partnerkey</auth_token>
+                <min_amount>60</min_amount>
+                <success_description>
+<![CDATA[<h2>Richiesta pagamento rateale con PagoLight effettuata</h2>
+<p>La tua richiesta di pagamento rateale è stata inoltrata.</p>
+<p>La concessione del finanziamento e il perfezionamento dell'ordine sono subordinati alla preventiva approvazione da parte di PagoLight.</p>
+<p>Riceverà via e-mail l'esito della richiesta di finanziamento e gli aggiornamenti sullo stato dell'ordine.</p>]]>
+                </success_description>
+                <error_description>
+<![CDATA[<h2>Richiesta pagamento rateale con PagoLight effettuata</h2>
+<p>Purtroppo si è verificato un errore durante il processo di richiesta di pagamento rateale.</p>
+<p>La preghiamo di rivolgersi al servizio di attenzione al cliente.</p>]]>
+                </error_description>
+                <success_description_before_redirect>
+<![CDATA[<h2>Pagamento rateale con PagoLight</h2>
+<p>Tra pochi secondi sara rediretto sulla pagina di PagoLight per completare la richiesta di pagamento rateale.</p>]]>
+                </success_description_before_redirect>
+                <error_description_before_redirect>
+<![CDATA[<h2>Pagamento rateale con PagoLight</h2>
+<p>Siamo spiacenti, non è possibile procedere con la richiesta del pagamento PagoLight per un problema tecnico.</p>
+<p>La preghiamo di rivolgersi al servizio di attenzione al cliente per completare la richiesta.</p>]]>
+                </error_description_before_redirect>
+
+            </soisypayment>
+        </payment>
+    </default>
+</config>

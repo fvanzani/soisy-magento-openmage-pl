@@ -1,0 +1,53 @@
+<?php
+if (!$this->isSimulationEnabled()) {
+    return;
+}
+
+?>
+<?php
+if (is_null(Mage::registry('current_product'))) {
+    return;
+}
+$product=Mage::registry('current_product');
+$price=Mage::helper('tax')->getPrice($product, $product->getFinalPrice(), true,  null, null, null, null, null, false);
+//if ($price<$this->getMinAmount()) {
+//    return;
+//}
+$price_in_minor_unit = (int) ($price*100);
+// todo: replace with config values
+$minimum_order_value = 6000;
+$maximum_order_value = 300000;
+if ($price_in_minor_unit < $minimum_order_value) {
+    return;
+}
+if ($price_in_minor_unit > $maximum_order_value) {
+    return;
+}
+?>
+<div id="heidipay-container"
+     class="heidipay-container-2"
+     data-heidipay="true"
+     data-heidipay-minorAmount="<?php echo $this->htmlEscape($price_in_minor_unit); ?>"
+     data-heidipay-term="12"
+     data-heidipay-currencySymbol="EUR"
+     data-heidipay-lang="it"
+     data-heidipay-type="PRODUCT_DESCRIPTION_PAGOLIGHT"
+     data-heidipay-apiKey="<?php echo $this->htmlEscape($this->getShopIdSimulation()); ?>"
+     data-heidipay-cadence="MONTHLY"
+     data-heidipay-thousandsSeparator="."
+     data-heidipay-decimalSeparator=","
+     data-heidipay-symbolOnLeft="false"
+     data-heidipay-spaceBetweenAmountAndSymbol="true"
+     data-heidipay-decimalDigits="2">
+</div>
+
+<?php
+return;
+?>
+<div class="soisy-loan-quote-wrapper">
+<soisy-loan-quote
+        shop-id="<?php echo $this->htmlEscape($this->getShopIdSimulation());?>"
+        amount="<?php echo  $this->htmlEscape($price);?>"
+        instalments="<?php echo $this->htmlEscape($this->getInstalments());?>"
+        zero-interest-rate="<?php echo $this->htmlEscape($this->getZeroInterestRate());?>"></soisy-loan-quote>
+</div>

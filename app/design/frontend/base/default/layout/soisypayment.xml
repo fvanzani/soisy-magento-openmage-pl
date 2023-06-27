@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+
+    <soisypayment_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="soisypayment/index" name="soisypayment_index" template="soisypayment/index.phtml"/>
+        </reference>
+    </soisypayment_index_index>
+
+    <catalog_product_view translate="label">
+        <reference name="head">
+            <!--
+ <block type="core/text" name="loan-quote-widget">
+     <action method="setText">
+         <text>
+
+         </text>
+
+      <text>
+          <![CDATA[<script async defer src="https://upstream.heidipay.com/sdk/heidi-upstream-lib.js"></script>]]>
+      </text>
+
+      <text>
+          <![CDATA[<script async defer src="https://cdn.soisy.it/loan-quote-widget.js" ></script>]]>
+      </text>
+
+     </action>
+ </block>
+      -->
+            <action method="addCss">
+                <stylesheet>css/soisypayment/simulation.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="product.info.extrahint">
+            <block type="soisypayment/simulation" name="soisypayment_simulation" template="soisypayment/simulation.phtml"/>
+        </reference>
+    </catalog_product_view>
+
+    <catalog_product_view translate="label">
+        <reference name="before_body_end">
+            <block type="core/text" name="loan-quote-widget2">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script  src="https://upstream.heidipay.com/sdk/heidi-upstream-lib.js"></script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <block type="core/text" name="loan-quote-widget">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script async defer src="https://upstream.heidipay.com/sdk/heidi-upstream-lib.js" type="application/javascript"></script>]]>
+                    </text>
+                </action>
+            </block>
+            <action method="addCss">
+                <stylesheet>css/soisypayment/simulation.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_success>
+        <reference name="content">
+            <block type="soisypayment/redirect" name="soisypayment_redirect" template="soisypayment/redirect.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+
+</layout>
+	
