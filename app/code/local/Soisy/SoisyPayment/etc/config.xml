@@ -85,9 +85,9 @@
                 <simulation_enabled>1</simulation_enabled>
                 <endpoint>https://api.sandbox.soisy.it</endpoint>
                 <webapp>https://shop.sandbox.soisy.it</webapp>
-                <shop_id>partnershop</shop_id>
+                <shop_id>shopid_pl</shop_id>
                 <shop_id_simulation>soisytests</shop_id_simulation>
-                <auth_token>partnerkey</auth_token>
+                <auth_token>apiKey</auth_token>
                 <min_amount>60</min_amount>
                 <success_description>
 <![CDATA[<h2>Richiesta pagamento rateale con PagoLight effettuata</h2>
